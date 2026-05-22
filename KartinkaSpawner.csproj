@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>KartinkaSpawner</AssemblyName>
+    <RootNamespace>KartinkaSpawner</RootNamespace>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExMod.Exiled" Version="9.13.3" PrivateAssets="all" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <!--
+    UnityEngine assemblies are not included in the EXILED NuGet package.
+    Put UnityEngine.CoreModule.dll into ./References
+    or set the SCP_SL_MANAGED MSBuild property/environment variable to your SCP:SL Managed folder.
+    Example: dotnet build -p:SCP_SL_MANAGED="C:\servers\scpsl\SCPSL_Data\Managed"
+  -->
+  <PropertyGroup Condition="'$(SCP_SL_MANAGED)' == ''">
+    <SCP_SL_MANAGED>References</SCP_SL_MANAGED>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Mirror">
+      <HintPath>..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
